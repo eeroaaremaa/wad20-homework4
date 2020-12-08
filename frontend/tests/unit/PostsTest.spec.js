@@ -38,7 +38,7 @@ const routes = [
 
 const router = new VueRouter({routes});
 
-const testData = [
+const mockTestData = [
     {
         id: 1,
         text: "I think it's going to rain",
@@ -86,61 +86,13 @@ const testData = [
             lastname: "Stallman",
             avatar: 'avatar.url'
         }
-    },
-    {
-        id: 11,
-        text: "I think it's going to rain",
-        createTime: "2020-12-05 13:53:23",
-        likes: 0,
-        liked: false,
-        media: {
-            url: "test-image.jpg",
-            type: "image"
-        },
-        author: {
-            id: 2,
-            firstname: "Gordon",
-            lastname: "Freeman",
-            avatar: 'avatar.url'
-        }
-    },
-    {
-        id: 21,
-        text: "Which weighs more, a pound of feathers or a pound of bricks?",
-        createTime: "2020-12-05 13:53:23",
-        likes: 1,
-        liked: true,
-        media: null,
-        author: {
-            id: 3,
-            firstname: "Sarah",
-            lastname: "Connor",
-            avatar: 'avatar.url'
-        }
-    },
-    {
-        id: 41,
-        text: null,
-        createTime: "2020-12-05 13:53:23",
-        likes: 3,
-        liked: false,
-        media: {
-            url: "test-video.mp4",
-            type: "video"
-        },
-        author: {
-            id: 5,
-            firstname: "Richard",
-            lastname: "Stallman",
-            avatar: 'avatar.url'
-        }
     }
 ];
 
 //Mock axios.get method that our Component calls in mounted event
-jest.doMock("axios", () => ({
+jest.mock("axios", () => ({
     get: () => Promise.resolve({
-        data: testData
+        data: mockTestData
     })
 }));
 
@@ -148,15 +100,8 @@ describe('Posts', () => {
 
     const wrapper = mount(Posts, {router, store, localVue});
 
-    it('1 == 1', function () {
-        expect(true).toBe(true)
-    });
-
     it('there are exactly as many posts rendered as contained in testData variable', function () {
         expect(wrapper.findComponent({ name: "Posts" }).exists()).toBe(true)
-        console.log(wrapper.findComponent({name: "Posts"}).find(".main-container").html());
-        console.log(wrapper.html())
-        //expect(wrapper.find("post").length).toBe(3);
-        //expect(wrapper.findComponent(Posts.components.LikeButton).length).toBe(3);
+        expect(wrapper.findAll(".post").length).toBe(mockTestData.length);
     });
 });
