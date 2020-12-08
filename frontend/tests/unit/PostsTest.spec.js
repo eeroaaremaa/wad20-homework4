@@ -154,7 +154,8 @@ describe('Posts', () => {
 
     it('there are exactly as many posts rendered as contained in testData variable', function () {
         expect(wrapper.findComponent({ name: "Posts" }).exists()).toBe(true)
-        console.log(wrapper.findComponent({ name: "Posts" }));
+        console.log(wrapper.findComponent({name: "Posts"}).find(".main-container").html());
+        console.log(wrapper.html())
         //expect(wrapper.find("post").length).toBe(3);
         //expect(wrapper.findComponent(Posts.components.LikeButton).length).toBe(3);
     });
