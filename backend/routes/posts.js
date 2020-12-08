@@ -25,7 +25,36 @@ router.get('/', authorize, (request, response) => {
 router.post('/', authorize,  (request, response) => {
 
     // Endpoint to create a new post
+    console.log("tessdft" );
+    let media = {
+        url: request.body.media.url,
+        type: request.body.media.type
+    }
+    let params = {
+        userId: request.currentUser.id,
+        text: request.body.text,
+        media
+    };
 
+    const fieldMissing = {
+        code: null,
+        message: 'Please provide %s field'
+    };
+
+    for (let field in params) {
+        if (params[field].required === true && !request.body[field]) {
+
+            fieldMissing.code = field;
+            fieldMissing.message = fieldMissing.message.replace('%s', field);
+
+            response.json(fieldMissing, 400);
+            return;
+        }
+    }
+
+    PostModel.create(params, () => {
+        response.status(201).json()
+    });
 });
 
 

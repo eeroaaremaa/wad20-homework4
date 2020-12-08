@@ -54,7 +54,7 @@
                 this.post = {
                     text: null,
                         media: {
-                        url: null,
+                            url: null,
                             type: null,
                     }
                 };
