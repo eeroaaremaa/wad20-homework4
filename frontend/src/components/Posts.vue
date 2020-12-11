@@ -13,7 +13,9 @@
                         <img :src="post.author.avatar" :alt="post.author | profileName"/>
                         <small>{{post.author | profileName}}</small>
                     </span>
+                    <span class="post-author-time">
                     <small>{{post.createTime | formatDate}}</small>
+                    </span>
                 </span>
                 <div class="post-image" v-if="post.media">
                     <img :src="post.media.url" :alt="post.text" v-if="post.media.type === 'image'">
@@ -124,6 +126,17 @@
         position: absolute;
         top: 12px;
         left: 45px;
+    }
+    .post .post-author .post-author-time small {
+        position: absolute;
+        top: 12px;
+        left: 45px;
+    }
+    .post .post-author .post-author-time + small {
+        float: right;
+        color: grey;
+        padding: 10px;
+        margin: 10px 0;
     }
 
     .post .post-author .post-author-info + small {

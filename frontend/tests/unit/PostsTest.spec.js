@@ -2,6 +2,7 @@ import {mount, createLocalVue} from '@vue/test-utils'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import Posts from "../../src/components/Posts.vue";
+import moment from 'moment'
 
 const localVue = createLocalVue();
 
@@ -103,5 +104,9 @@ describe('Posts', () => {
     it('there are exactly as many posts rendered as contained in testData variable', function () {
         expect(wrapper.findComponent({ name: "Posts" }).exists()).toBe(true)
         expect(wrapper.findAll(".post").length).toBe(mockTestData.length);
-    });
+    })
+    it('post create time is displayed in correct format: Saturday, December 5, 2020 1:53 PM', () => {
+        let time = wrapper.find('.post-author-time')
+        expect(time.text()).toEqual('Saturday, December 5, 2020 1:53 PM')
+    })
 });
