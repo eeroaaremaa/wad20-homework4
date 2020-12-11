@@ -104,4 +104,10 @@ describe('Posts', () => {
         expect(wrapper.findComponent({ name: "Posts" }).exists()).toBe(true)
         expect(wrapper.findAll(".post").length).toBe(mockTestData.length);
     });
+    it('image or video tags are rendered depending on media.type property, or if media property is absent nothing is rendered', function () {
+        expect(wrapper.findAll("div.post-image img").exists()).toBe(true)
+        expect(wrapper.findAll("div.post-image video").exists()).toBe(true)
+    })
+
+
 });
